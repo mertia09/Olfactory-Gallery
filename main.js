@@ -38,6 +38,130 @@ const PRODUCTS_DB = {
 
 window.PRODUCTS_DB = PRODUCTS_DB;
 
+const MATERIAL_ICON_FALLBACKS = {
+    add: '<path d="M12 5v14M5 12h14"/>',
+    arrow_back: '<path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>',
+    arrow_forward: '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+    bolt: '<path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/>',
+    boxes: '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>',
+    check: '<path d="m20 6-11 11-5-5"/>',
+    check_circle: '<path d="M22 12A10 10 0 1 1 12 2a10 10 0 0 1 10 10Z"/><path d="m9 12 2 2 4-4"/>',
+    dark_mode: '<path d="M21 12.79A9 9 0 1 1 11.21 3c0 .34-.02.67-.02 1a7 7 0 0 0 7 7c.33 0 .66-.02 1-.06.32-.03.61.24.61.56 0 .1-.02.2-.06.29Z"/>',
+    delete: '<path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/>',
+    eco: '<path d="M6 20c8 0 12-6 12-14-8 0-12 6-12 14Z"/><path d="M6 20c0-6 4-10 8-12"/>',
+    home: '<path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
+    insights: '<path d="M4 19V9"/><path d="M10 19V5"/><path d="M16 19v-8"/><path d="M22 19v-4"/>',
+    language: '<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20"/><path d="M12 2a15 15 0 0 0 0 20"/>',
+    local_florist: '<path d="M12 22c4-3.5 6-6.8 6-10a3 3 0 0 0-6 0 3 3 0 0 0-6 0c0 3.2 2 6.5 6 10Z"/><circle cx="12" cy="10" r="2.2"/><path d="M12 12v10"/>',
+    local_shipping: '<path d="M14 16H9"/><path d="M1 3h15v13H1Z"/><path d="M16 8h4l3 3v5h-7Z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>',
+    location_on: '<path d="M12 21s-6-5.33-6-11a6 6 0 0 1 12 0c0 5.67-6 11-6 11Z"/><circle cx="12" cy="10" r="2.5"/>',
+    mail: '<path d="M4 6h16v12H4Z"/><path d="m4 8 8 6 8-6"/>',
+    palette: '<path d="M12 3a9 9 0 0 0 0 18h1.2a1.8 1.8 0 0 0 0-3.6H12a1.5 1.5 0 0 1 0-3 6 6 0 1 0 0-12Z"/><circle cx="7.5" cy="10" r="1"/><circle cx="10.5" cy="7" r="1"/><circle cx="15.5" cy="7.5" r="1"/><circle cx="17" cy="12" r="1"/>',
+    phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.78.59 2.62a2 2 0 0 1-.45 2.11L8 9.91a16 16 0 0 0 6.09 6.09l1.46-1.25a2 2 0 0 1 2.11-.45c.84.27 1.72.47 2.62.59A2 2 0 0 1 22 16.92Z"/>',
+    public: '<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z"/><path d="M2 12h20"/><path d="M12 2c2.8 2.7 4.5 6.2 4.5 10S14.8 19.3 12 22"/><path d="M12 2C9.2 4.7 7.5 8.2 7.5 12S9.2 19.3 12 22"/>',
+    remove: '<path d="M5 12h14"/>',
+    science: '<path d="M9 3h6"/><path d="M10 3v5l-5.5 9.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-3.5L14 8V3"/><path d="M8.5 13h7"/>',
+    search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+    settings: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1 1 0 0 0 .2 1.1l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1 1 0 0 0-1.1-.2 1 1 0 0 0-.6.9V20a2 2 0 1 1-4 0v-.2a1 1 0 0 0-.6-.9 1 1 0 0 0-1.1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1 1 0 0 0 .2-1.1 1 1 0 0 0-.9-.6H4a2 2 0 1 1 0-4h.2a1 1 0 0 0 .9-.6 1 1 0 0 0-.2-1.1l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1 1 0 0 0 1.1.2 1 1 0 0 0 .6-.9V4a2 2 0 1 1 4 0v.2a1 1 0 0 0 .6.9 1 1 0 0 0 1.1-.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1 1 0 0 0-.2 1.1 1 1 0 0 0 .9.6H20a2 2 0 1 1 0 4h-.2a1 1 0 0 0-.9.6Z"/>',
+    share: '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 3.9"/><path d="m15.4 6.6-6.8 3.8"/>',
+    shopping_bag: '<path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8a3 3 0 1 1 6 0"/>',
+    shopping_cart: '<circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M3 4h2l2.1 10.2a1 1 0 0 0 1 .8H19a1 1 0 0 0 1-.8L22 7H7"/>',
+    star: '<path d="m12 2.7 2.9 5.88 6.49.95-4.69 4.58 1.11 6.47L12 17.53l-5.81 3.05 1.11-6.47L2.61 9.53l6.49-.95L12 2.7Z"/>',
+    verified: '<path d="m9 12 2 2 4-4"/><path d="M12 3l2.5 1.2 2.8.3 1.2 2.5 2 2-1 2.7.3 2.8-2.5 1.2-2 2-2.8-.3L12 21l-2.5-1.2-2.8-.3-1.2-2.5-2-2 1-2.7-.3-2.8 2.5-1.2 2-2 2.8.3L12 3Z"/>',
+    verified_user: '<path d="M12 3 5 6v5c0 5 3.5 9.7 7 11 3.5-1.3 7-6 7-11V6l-7-3Z"/><path d="m9 12 2 2 4-4"/>'
+};
+
+function createMaterialIconSvg(iconName, outlined = true) {
+    const pathMarkup = MATERIAL_ICON_FALLBACKS[iconName];
+    if (!pathMarkup) return null;
+
+    const strokeIcons = new Set([
+        'add', 'arrow_back', 'arrow_forward', 'boxes', 'check', 'check_circle', 'delete',
+        'eco', 'home', 'insights', 'language', 'local_shipping', 'location_on', 'mail',
+        'palette', 'phone', 'public', 'remove', 'science', 'search', 'settings', 'share',
+        'shopping_cart', 'verified', 'verified_user'
+    ]);
+
+    const useStroke = outlined && strokeIcons.has(iconName);
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.innerHTML = pathMarkup;
+
+    if (useStroke) {
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('stroke', 'currentColor');
+        svg.setAttribute('stroke-width', '1.8');
+        svg.setAttribute('stroke-linecap', 'round');
+        svg.setAttribute('stroke-linejoin', 'round');
+    } else {
+        svg.setAttribute('fill', 'currentColor');
+    }
+
+    return svg;
+}
+
+function applyMaterialIconFallback() {
+    document.querySelectorAll('.material-symbols-outlined').forEach((iconEl) => {
+        if (iconEl.dataset.iconFallback === 'true') return;
+
+        const iconName = (iconEl.dataset.icon || iconEl.textContent || '').trim();
+        const svg = createMaterialIconSvg(iconName, !iconEl.classList.contains('filled'));
+        if (!svg) return;
+
+        iconEl.dataset.icon = iconName;
+        iconEl.dataset.iconFallback = 'true';
+        iconEl.setAttribute('aria-hidden', 'true');
+        iconEl.replaceChildren(svg);
+    });
+}
+
+function initMaterialIconFallback() {
+    const iconNodes = document.querySelectorAll('.material-symbols-outlined');
+    if (!iconNodes.length) return;
+
+    const observeNewIcons = () => {
+        const observer = new MutationObserver((mutations) => {
+            const hasNewIcons = mutations.some((mutation) => [...mutation.addedNodes].some((node) => (
+                node.nodeType === Node.ELEMENT_NODE
+                && (node.matches?.('.material-symbols-outlined') || node.querySelector?.('.material-symbols-outlined'))
+            )));
+
+            if (hasNewIcons) {
+                applyMaterialIconFallback();
+            }
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
+    };
+
+    if (!('fonts' in document) || typeof document.fonts.load !== 'function') {
+        applyMaterialIconFallback();
+        observeNewIcons();
+        return;
+    }
+
+    const fallbackTimer = window.setTimeout(() => {
+        if (!document.fonts.check('24px "Material Symbols Outlined"')) {
+            applyMaterialIconFallback();
+        }
+    }, 1200);
+
+    document.fonts.load('24px "Material Symbols Outlined"')
+        .then(() => {
+            window.clearTimeout(fallbackTimer);
+            if (!document.fonts.check('24px "Material Symbols Outlined"')) {
+                applyMaterialIconFallback();
+            }
+            observeNewIcons();
+        })
+        .catch(() => {
+            window.clearTimeout(fallbackTimer);
+            applyMaterialIconFallback();
+            observeNewIcons();
+        });
+}
+
 function formatPrice(price, currency = '₹') {
     return `${currency}${price}`;
 }
@@ -343,6 +467,7 @@ function applyInventorySearchFilter() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    initMaterialIconFallback();
     initDarkMode();
     initScrollReveal();
     initHeroAnimation();
