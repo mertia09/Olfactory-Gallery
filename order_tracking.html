@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300&amp;family=Manrope:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            keyframes: {
+              "fade-in": { "0%": { opacity: "0" }, "100%": { opacity: "1" } },
+              "slide-up": { "0%": { opacity: "0", transform: "translateY(20px)" }, "100%": { opacity: "1", transform: "translateY(0)" } },
+              "slide-in-left": { "0%": { opacity: "0", transform: "translateX(-20px)" }, "100%": { opacity: "1", transform: "translateX(0)" } },
+              "pulse-soft": { "0%, 100%": { opacity: "1" }, "50%": { opacity: "0.7" } }
+            },
+            animation: {
+              "fade-in": "fade-in 0.6s ease-out",
+              "slide-up": "slide-up 0.6s ease-out",
+              "slide-in-left": "slide-in-left 0.5s ease-out",
+              "pulse-soft": "pulse-soft 2s ease-in-out infinite"
+            },
+            colors: {
+              "on-secondary-fixed-variant": "#5d4201",
+              "error-container": "#ffdad6",
+              "on-error-container": "#93000a",
+              "tertiary-fixed-dim": "#c8c6c6",
+              "outline": "#707974",
+              "surface-container-highest": "#e5e2dc",
+              "secondary-fixed-dim": "#e9c176",
+              "secondary-fixed": "#ffdea5",
+              "on-primary": "#ffffff",
+              "surface-bright": "#fcf9f3",
+              "on-secondary-fixed": "#261900",
+              "on-primary-fixed-variant": "#0b513d",
+              "secondary": "#775a19",
+              "inverse-surface": "#31312d",
+              "on-tertiary-fixed": "#1b1c1c",
+              "tertiary-container": "#444444",
+              "surface-dim": "#dcdad4",
+              "surface-tint": "#2b6954",
+              "surface-variant": "#e5e2dc",
+              "on-tertiary": "#ffffff",
+              "on-primary-container": "#80bea6",
+              "outline-variant": "#bfc9c3",
+              "on-surface-variant": "#404944",
+              "tertiary": "#2e2e2e",
+              "surface-container": "#f0eee8",
+              "surface": "#fcf9f3",
+              "tertiary-fixed": "#e4e2e1",
+              "surface-container-high": "#ebe8e2",
+              "on-secondary": "#ffffff",
+              "on-background": "#1c1c18",
+              "inverse-primary": "#95d3ba",
+              "primary": "#003527",
+              "on-secondary-container": "#785a1a",
+              "primary-fixed-dim": "#95d3ba",
+              "on-primary-fixed": "#002117",
+              "on-error": "#ffffff",
+              "on-tertiary-fixed-variant": "#474747",
+              "inverse-on-surface": "#f3f0ea",
+              "secondary-container": "#fed488",
+              "on-surface": "#1c1c18",
+              "error": "#ba1a1a",
+              "primary-container": "#064e3b",
+              "surface-container-low": "#f6f3ed",
+              "on-tertiary-container": "#b3b1b1",
+              "primary-fixed": "#b0f0d6",
+              "surface-container-lowest": "#ffffff",
+              "background": "#fcf9f3"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .luxury-shadow {
+            box-shadow: 0 20px 50px -12px rgba(0, 53, 39, 0.08);
+        }
+        .text-kern-tight {
+            letter-spacing: -0.02em;
+        }
+        input::placeholder {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary">
+<!-- Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-white/60 dark:bg-emerald-950/40 backdrop-blur-xl shadow-sm border-b border-outline-variant/10 flex justify-between items-center px-8 py-4">
+  <div class="font-headline text-2xl font-light tracking-wide text-primary dark:text-emerald-50">
+    Olfactory Gallery
+  </div>
+  <div class="flex items-center gap-6">
+    <button onclick="goToCart()" class="p-2 cursor-pointer active:scale-95 transition-transform hover:opacity-70 relative group">
+      <span class="material-symbols-outlined text-primary dark:text-emerald-50">shopping_bag</span>
+      <span id="cartCount" class="absolute -top-1 -right-1 w-5 h-5 bg-secondary text-white text-xs font-semibold rounded-full flex items-center justify-center hidden group-hover:flex transition-all">0</span>
+    </button>
+  </div>
+</nav>
+
+<main class="min-h-screen flex flex-col items-center justify-center py-20 px-6">
+  <!-- Track Order Container -->
+  <div class="w-full max-w-2xl animate-fade-in">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <span class="font-label text-xs uppercase tracking-widest text-secondary mb-3 block">Order Status</span>
+      <h1 class="font-headline text-5xl md:text-6xl text-primary font-light mb-4">Track Your Order</h1>
+      <p class="text-on-surface-variant text-base max-w-md mx-auto">Enter your order details to track your shipment in real-time.</p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="glass-effect bg-surface-container-lowest/80 border border-outline-variant/20 rounded-2xl p-8 md:p-12 luxury-shadow mb-12 animate-slide-up">
+      <form class="space-y-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Order ID Input -->
+          <div>
+            <label class="font-label text-xs uppercase tracking-widest text-tertiary mb-3 block font-semibold">Order ID</label>
+            <input type="text" placeholder="e.g., OG-2024-001" class="w-full bg-transparent border-b-2 border-outline-variant/30 py-3 focus:border-primary focus:outline-none transition-colors duration-300 font-body text-base placeholder:text-outline-variant/50"/>
+          </div>
+          
+          <!-- Email Input -->
+          <div>
+            <label class="font-label text-xs uppercase tracking-widest text-tertiary mb-3 block font-semibold">Email</label>
+            <input type="email" placeholder="your@email.com" class="w-full bg-transparent border-b-2 border-outline-variant/30 py-3 focus:border-primary focus:outline-none transition-colors duration-300 font-body text-base placeholder:text-outline-variant/50"/>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-center pt-4">
+          <button type="submit" class="bg-gradient-to-r from-primary to-primary-container text-on-primary font-label font-semibold uppercase tracking-wider text-sm px-10 py-3 rounded-lg hover:shadow-lg hover:translate-y-[-2px] active:translate-y-0 transition-all duration-300">
+            Track Order
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Progress Tracker -->
+    <div class="mt-16 animate-slide-up" style="animation-delay: 0.2s;">
+      <h3 class="font-label text-sm uppercase tracking-widest text-tertiary font-semibold mb-8 text-center">Order Status Timeline</h3>
+      
+      <div class="relative flex items-center justify-between">
+        <!-- Progress Line Background -->
+        <div class="absolute top-5 left-0 w-full h-1 bg-outline-variant/20 -z-10"></div>
+        
+        <!-- Progress Line Active -->
+        <div class="absolute top-5 left-0 w-1/2 h-1 bg-primary -z-10 transition-all duration-1000"></div>
+
+        <!-- Step 1: Confirmed -->
+        <div class="relative flex flex-col items-center group cursor-pointer hover:opacity-80 transition-opacity">
+          <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform duration-300">
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+          </div>
+          <span class="absolute -bottom-8 whitespace-nowrap font-label text-xs uppercase tracking-wide text-primary font-semibold text-center">Confirmed</span>
+        </div>
+
+        <!-- Step 2: Processing -->
+        <div class="relative flex flex-col items-center group cursor-pointer hover:opacity-80 transition-opacity">
+          <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform duration-300">
+            <span class="material-symbols-outlined text-sm animate-pulse-soft" style="font-variation-settings: 'FILL' 1;">boxes</span>
+          </div>
+          <span class="absolute -bottom-8 whitespace-nowrap font-label text-xs uppercase tracking-wide text-primary font-semibold text-center">Processing</span>
+        </div>
+
+        <!-- Step 3: Shipped -->
+        <div class="relative flex flex-col items-center group cursor-pointer hover:opacity-80 transition-opacity">
+          <div class="w-10 h-10 rounded-full bg-surface-container-high border-2 border-outline-variant/50 flex items-center justify-center text-outline-variant shadow-lg group-hover:scale-110 transition-transform duration-300">
+            <span class="material-symbols-outlined text-sm">local_shipping</span>
+          </div>
+          <span class="absolute -bottom-8 whitespace-nowrap font-label text-xs uppercase tracking-wide text-outline-variant font-semibold text-center">Shipped</span>
+        </div>
+
+        <!-- Step 4: Delivered -->
+        <div class="relative flex flex-col items-center group cursor-pointer hover:opacity-80 transition-opacity">
+          <div class="w-10 h-10 rounded-full bg-surface-container-high border-2 border-outline-variant/50 flex items-center justify-center text-outline-variant shadow-lg group-hover:scale-110 transition-transform duration-300">
+            <span class="material-symbols-outlined text-sm">home</span>
+          </div>
+          <span class="absolute -bottom-8 whitespace-nowrap font-label text-xs uppercase tracking-wide text-outline-variant font-semibold text-center">Delivered</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Help Section -->
+    <div class="mt-20 text-center p-6 bg-surface-container rounded-lg border border-outline-variant/10">
+      <p class="font-body text-on-surface-variant text-sm mb-3">
+        Need help? <a href="contact.html" class="text-primary font-semibold hover:underline transition-all">Contact Support</a>
+      </p>
+      <p class="font-label text-xs text-outline-variant">Typical delivery time: 3-5 business days</p>
+    </div>
+  </div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-high dark:bg-stone-900 border-t border-outline-variant/10 mt-24">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 max-w-7xl mx-auto">
+    <!-- Brand -->
+    <div>
+      <div class="font-headline text-xl font-light text-primary dark:text-emerald-50 mb-3">Olfactory Gallery</div>
+      <p class="font-body text-sm text-on-surface-variant">Premium fragrances and scents for the modern home.</p>
+    </div>
+
+    <!-- Links -->
+    <div>
+      <h4 class="font-label text-xs uppercase tracking-widest text-primary dark:text-emerald-50 font-semibold mb-4">Information</h4>
+      <ul class="space-y-3 text-sm">
+        <li><a href="inventory.html" class="text-on-surface-variant hover:text-primary transition-colors">Collections</a></li>
+        <li><a href="#" class="text-on-surface-variant hover:text-primary transition-colors">About Us</a></li>
+        <li><a href="#" class="text-on-surface-variant hover:text-primary transition-colors">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Support -->
+    <div>
+      <h4 class="font-label text-xs uppercase tracking-widest text-primary dark:text-emerald-50 font-semibold mb-4">Support</h4>
+      <ul class="space-y-3 text-sm">
+        <li><a href="#" class="text-on-surface-variant hover:text-primary transition-colors">Shipping & Returns</a></li>
+        <li><a href="#" class="text-on-surface-variant hover:text-primary transition-colors">Privacy Policy</a></li>
+        <li><a href="#" class="text-on-surface-variant hover:text-primary transition-colors">Terms of Service</a></li>
+      </ul>
+    </div>
+
+    <!-- Newsletter -->
+    <div>
+      <h4 class="font-label text-xs uppercase tracking-widest text-primary dark:text-emerald-50 font-semibold mb-4">Newsletter</h4>
+      <div class="flex border-b-2 border-outline-variant/30 pb-3 mb-3 hover:border-primary transition-colors">
+        <input type="email" placeholder="Your email" class="bg-transparent border-none text-sm w-full focus:ring-0 focus:outline-none placeholder:text-on-surface-variant/50"/>
+        <button class="material-symbols-outlined text-primary hover:scale-110 transition-transform">arrow_forward</button>
+      </div>
+      <p class="font-label text-xs text-on-surface-variant">Get updates on new collections and promotions.</p>
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="border-t border-outline-variant/10 bg-surface-container px-8 py-6">
+    <p class="text-center font-label text-xs text-on-surface-variant uppercase tracking-widest">
+      © 2024 Olfactory Gallery. All Rights Reserved.
+    </p>
+  </div>
+</footer>
+
+<script>
+// Product Database with Images
+const PRODUCTS_DB = {
+  1: { name: 'Sandalwood Essence', category: 'Woody', price: 2999, image: 'https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg' },
+  2: { name: 'Cedar Cologne', category: 'Woody', price: 2799, image: 'https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg' },
+  3: { name: 'Vetiver Trail', category: 'Woody', price: 2999, image: 'https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg' },
+  4: { name: 'Timber Reserve', category: 'Woody', price: 3199, image: 'https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg' },
+  5: { name: 'Rose Bloom', category: 'Floral', price: 2899, image: 'https://images.pexels.com/photos/5632401/pexels-photo-5632401.jpeg' },
+  6: { name: 'Jasmine Night', category: 'Floral', price: 3099, image: 'https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg' },
+  7: { name: 'Peony Garden', category: 'Floral', price: 2899, image: 'https://images.pexels.com/photos/5632403/pexels-photo-5632403.jpeg' },
+  8: { name: 'Orchid Silk', category: 'Floral', price: 3399, image: 'https://images.pexels.com/photos/5632404/pexels-photo-5632404.jpeg' },
+  9: { name: 'Citrus Zest', category: 'Fresh', price: 2699, image: 'https://images.pexels.com/photos/5632405/pexels-photo-5632405.jpeg' },
+  10: { name: 'Aquatic Wave', category: 'Fresh', price: 2899, image: 'https://images.pexels.com/photos/5632406/pexels-photo-5632406.jpeg' },
+  11: { name: 'Herbal Breeze', category: 'Fresh', price: 2799, image: 'https://images.pexels.com/photos/5632407/pexels-photo-5632407.jpeg' },
+  12: { name: 'Green Tea', category: 'Fresh', price: 2999, image: 'https://images.pexels.com/photos/5632408/pexels-photo-5632408.jpeg' },
+  13: { name: 'Amber Dynasty', category: 'Oriental', price: 3599, image: 'https://images.pexels.com/photos/5632409/pexels-photo-5632409.jpeg' },
+  14: { name: 'Musk Veil', category: 'Oriental', price: 3799, image: 'https://images.pexels.com/photos/5632410/pexels-photo-5632410.jpeg' },
+  15: { name: 'Vanilla Romance', category: 'Oriental', price: 3499, image: 'https://images.pexels.com/photos/5632411/pexels-photo-5632411.jpeg' },
+  16: { name: 'Spice Luxe', category: 'Oriental', price: 3699, image: 'https://images.pexels.com/photos/5632412/pexels-photo-5632412.jpeg' },
+  17: { name: 'Lavender Dream', category: 'Aromatic', price: 2599, image: 'https://images.pexels.com/photos/5632413/pexels-photo-5632413.jpeg' },
+  18: { name: 'Mint Refresh', category: 'Aromatic', price: 2699, image: 'https://images.pexels.com/photos/5632414/pexels-photo-5632414.jpeg' },
+  19: { name: 'Spice Note', category: 'Aromatic', price: 2899, image: 'https://images.pexels.com/photos/5632415/pexels-photo-5632415.jpeg' },
+  20: { name: 'Rosemary Grace', category: 'Aromatic', price: 2499, image: 'https://images.pexels.com/photos/5632416/pexels-photo-5632416.jpeg' }
+};
+
+// Cart Management Functions
+function addToCart(id, name, category, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const productData = PRODUCTS_DB[id] || {};
+    const imageUrl = productData.image || 'https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg';
+    const existingItem = cart.find(item => item.id === id);
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ id, name, category, price, quantity: 1, image: imageUrl });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCountDisplay();
+}
+
+function updateCartCountDisplay() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const cartCountBadge = document.getElementById('cartCount');
+    if (cartCountBadge) {
+        if (totalItems > 0) {
+            cartCountBadge.textContent = totalItems;
+            cartCountBadge.classList.remove('hidden');
+        } else {
+            cartCountBadge.classList.add('hidden');
+        }
+    }
+}
+
+function goToCart() {
+    document.body.style.opacity = '0.8';
+    setTimeout(() => {
+        window.location.href = 'Cart.html';
+    }, 300);
+}
+
+// Initialize cart count on page load
+document.addEventListener('DOMContentLoaded', updateCartCountDisplay);
+</script>
+</body></html>

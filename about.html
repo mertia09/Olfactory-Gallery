@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Olfactory Gallery</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300&family=Manrope:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#003527",
+                        "secondary": "#775a19",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#80bea6",
+                        "surface": "#fcf9f3",
+                        "background": "#fcf9f3",
+                        "on-surface": "#1c1c18"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-secondary/20 overflow-x-hidden">
+
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-[#fcf9f3]/80 dark:bg-[#1c1c18]/80 backdrop-blur-xl shadow-[0_4px_40px_rgba(0,0,0,0.04)] dark:shadow-none">
+    <div class="flex justify-between items-center max-w-7xl mx-auto px-8 py-6">
+        <div class="flex items-center gap-12">
+            <a class="text-2xl font-serif italic tracking-tighter text-[#003527] dark:text-[#fcf9f3]" href="index.html">Olfactory Gallery</a>
+            <div class="hidden md:flex gap-8 font-headline font-light tracking-tight dark:text-stone-200">
+                <a class="text-[#2e2e2e] dark:text-[#bfc9c3] hover:text-[#003527] dark:hover:text-white transition-colors duration-400" href="collections.html">Collections</a>
+                <a class="text-[#775a19] border-b border-[#775a19] pb-1 font-medium transition-colors duration-400" href="about.html">About</a>
+                <a class="text-[#2e2e2e] dark:text-[#bfc9c3] hover:text-[#003527] dark:hover:text-white transition-colors duration-400" href="testimonials.html">Reviews</a>
+                <a class="text-[#2e2e2e] dark:text-[#bfc9c3] hover:text-[#003527] dark:hover:text-white transition-colors duration-400" href="contact.html">Contact</a>
+            </div>
+        </div>
+        <div class="flex items-center gap-6">
+            <button class="p-2 cursor-pointer active:scale-95 transition-transform hover:opacity-70" data-theme-toggle>
+                <span class="material-symbols-outlined text-[#003527] dark:text-[#fcf9f3]">dark_mode</span>
+            </button>
+            <button onclick="goToCart()" class="p-2 cursor-pointer active:scale-95 transition-transform hover:opacity-70 relative group">
+                <span class="material-symbols-outlined text-[#003527] dark:text-[#fcf9f3]">shopping_bag</span>
+                <span id="cartCount" class="absolute -top-1 -right-1 w-5 h-5 bg-secondary text-white text-xs font-semibold rounded-full flex items-center justify-center hidden group-hover:flex transition-all">0</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <!-- Our Story Section -->
+    <section class="py-40 bg-primary text-on-primary overflow-hidden">
+        <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 items-center gap-20">
+            <div class="relative reveal-on-scroll">
+                <div class="aspect-[4/5] rounded-xl overflow-hidden relative group">
+                    <img alt="Master Perfumer" class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105" src="https://images.pexels.com/photos/15354693/pexels-photo-15354693.jpeg">
+                    <div class="absolute inset-0 bg-primary/20"></div>
+                </div>
+            </div>
+            <div class="reveal-on-scroll">
+                <span class="font-label text-on-primary-container tracking-[0.3em] text-xs mb-8 block uppercase">Our Mission</span>
+                <h1 class="font-headline text-5xl mb-8 leading-tight">Crafting Exceptional Fragrances</h1>
+                <p class="font-body text-on-primary-container text-lg leading-relaxed mb-8">
+                    We believe that fragrance is more than scent—it's a personal signature. Every composition from Olfactory Gallery is created with intention, crafted with precision, and delivered with purpose.
+                </p>
+                <p class="font-body text-on-primary-container/90 text-lg leading-relaxed">
+                    Our team collaborates with world-renowned perfumers to source the finest ingredients and create fragrances that stand out.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="py-32 bg-surface px-8 overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="font-headline text-5xl text-primary mb-20 text-center reveal-on-scroll">Our Process</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 reveal-on-scroll">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="material-symbols-outlined text-white">science</span>
+                    </div>
+                    <h3 class="font-headline text-2xl text-primary mb-4">Research & Development</h3>
+                    <p class="font-body text-tertiary/70 leading-relaxed">
+                        We collaborate with master perfumers to identify rare ingredients and test formulations extensively.
+                    </p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="material-symbols-outlined text-white">settings</span>
+                    </div>
+                    <h3 class="font-headline text-2xl text-primary mb-4">Crafting & Testing</h3>
+                    <p class="font-body text-tertiary/70 leading-relaxed">
+                        Each batch undergoes rigorous quality testing to ensure consistency and excellence.
+                    </p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="material-symbols-outlined text-white">local_shipping</span>
+                    </div>
+                    <h3 class="font-headline text-2xl text-primary mb-4">Delivery & Care</h3>
+                    <p class="font-body text-tertiary/70 leading-relaxed">
+                        Premium packaging and careful shipping ensure your fragrance arrives in perfect condition.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="py-32 bg-surface-container-low px-8 overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="space-y-8 reveal-on-scroll">
+                <div class="flex items-start gap-6">
+                    <span class="material-symbols-outlined text-secondary text-3xl flex-shrink-0">eco</span>
+                    <div>
+                        <h3 class="font-headline text-2xl text-primary mb-2">Sustainable Sourcing</h3>
+                        <p class="font-body text-tertiary/70 leading-relaxed">
+                            We partner with ethical suppliers to ensure all ingredients are sustainably and responsibly sourced.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-6">
+                    <span class="material-symbols-outlined text-secondary text-3xl flex-shrink-0">palette</span>
+                    <div>
+                        <h3 class="font-headline text-2xl text-primary mb-2">Artistic Excellence</h3>
+                        <p class="font-body text-tertiary/70 leading-relaxed">
+                            Each fragrance is a work of art, designed to evoke emotion and create lasting impressions.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-6">
+                    <span class="material-symbols-outlined text-secondary text-3xl flex-shrink-0">verified</span>
+                    <div>
+                        <h3 class="font-headline text-2xl text-primary mb-2">Quality Assurance</h3>
+                        <p class="font-body text-tertiary/70 leading-relaxed">
+                            Every product meets rigorous standards before reaching our customers.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-[#f6f3ed] dark:bg-[#121210] w-full pt-20 pb-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-8 border-t border-[#bfc9c3]/15 pt-12">
+        <div>
+            <div class="text-xl font-serif text-[#003527] dark:text-[#fcf9f3] mb-8">Gallery</div>
+            <p class="font-label text-sm tracking-wide leading-relaxed text-[#2e2e2e]/70 dark:text-[#bfc9c3]/70 mb-6">
+                A collection of premium fragrances for the discerning customer.
+            </p>
+        </div>
+        <div>
+            <h4 class="font-headline text-primary dark:text-on-tertiary mb-6 text-sm uppercase tracking-widest">Shop</h4>
+            <div class="flex flex-col gap-4 font-label text-sm tracking-wide">
+                <a class="text-[#2e2e2e]/70 dark:text-[#bfc9c3]/70 hover:text-[#775a19] transition-all" href="collections.html">Collections</a>
+                <a class="text-[#2e2e2e]/70 dark:text-[#bfc9c3]/70 hover:text-[#775a19] transition-all" href="#">All Fragrances</a>
+                <a class="text-[#2e2e2e]/70 dark:text-[#bfc9c3]/70 hover:text-[#775a19] transition-all" href="#">Gift Sets</a>
+            </div>
+        </div>
+        <div>
+            <h4 class="font-headline text-primary dark:text-on-tertiary mb-6 text-sm uppercase tracking-widest">Company</h4>
+            <div class="flex flex-col gap-4 font-label text-sm tracking-wide">
+                <a class="text-[#2e2e2e]/70 dark:text-[#bfc9c3]/70 hover:text-[#775a19] transition-all" href="about.html">About</a>
+                <a class="text-[#2e2e2e]/70 dark:text-[#bfc9c3]/70 hover:text-[#775a19] transition-all" href="#">Blog</a>
+                <a class="text-[#2e2e2e]/70 dark:text-[#bfc9c3]/70 hover:text-[#775a19] transition-all" href="contact.html">Contact</a>
+            </div>
+        </div>
+        <div>
+            <h4 class="font-headline text-primary dark:text-on-tertiary mb-6 text-sm uppercase tracking-widest">Newsletter</h4>
+            <p class="font-label text-sm tracking-wide leading-relaxed text-[#2e2e2e]/70 dark:text-[#bfc9c3]/70 mb-4">
+                Get new releases and exclusive offers.
+            </p>
+            <div class="relative">
+                <input class="w-full bg-transparent border-b border-outline-variant/30 py-2 text-sm focus:border-secondary transition-colors outline-none" placeholder="Your email" type="email">
+                <button class="absolute right-0 bottom-2 text-secondary">
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-8 mt-20 flex flex-col md:flex-row justify-between items-center text-[10px] text-[#2e2e2e]/40 dark:text-[#bfc9c3]/40 uppercase tracking-[0.2em]">
+        <p>© 2024 Olfactory Gallery. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+// Product Database with Images
+const PRODUCTS_DB = {
+  1: { name: 'Sandalwood Essence', category: 'Woody', price: 2999, image: 'https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg' },
+  2: { name: 'Cedar Cologne', category: 'Woody', price: 2799, image: 'https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg' },
+  3: { name: 'Vetiver Trail', category: 'Woody', price: 2999, image: 'https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg' },
+  4: { name: 'Timber Reserve', category: 'Woody', price: 3199, image: 'https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg' },
+  5: { name: 'Rose Bloom', category: 'Floral', price: 2899, image: 'https://images.pexels.com/photos/5632401/pexels-photo-5632401.jpeg' },
+  6: { name: 'Jasmine Night', category: 'Floral', price: 3099, image: 'https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg' },
+  7: { name: 'Peony Garden', category: 'Floral', price: 2899, image: 'https://images.pexels.com/photos/5632403/pexels-photo-5632403.jpeg' },
+  8: { name: 'Orchid Silk', category: 'Floral', price: 3399, image: 'https://images.pexels.com/photos/5632404/pexels-photo-5632404.jpeg' },
+  9: { name: 'Citrus Zest', category: 'Fresh', price: 2699, image: 'https://images.pexels.com/photos/5632405/pexels-photo-5632405.jpeg' },
+  10: { name: 'Aquatic Wave', category: 'Fresh', price: 2899, image: 'https://images.pexels.com/photos/5632406/pexels-photo-5632406.jpeg' },
+  11: { name: 'Herbal Breeze', category: 'Fresh', price: 2799, image: 'https://images.pexels.com/photos/5632407/pexels-photo-5632407.jpeg' },
+  12: { name: 'Green Tea', category: 'Fresh', price: 2999, image: 'https://images.pexels.com/photos/5632408/pexels-photo-5632408.jpeg' },
+  13: { name: 'Amber Dynasty', category: 'Oriental', price: 3599, image: 'https://images.pexels.com/photos/5632409/pexels-photo-5632409.jpeg' },
+  14: { name: 'Musk Veil', category: 'Oriental', price: 3799, image: 'https://images.pexels.com/photos/5632410/pexels-photo-5632410.jpeg' },
+  15: { name: 'Vanilla Romance', category: 'Oriental', price: 3499, image: 'https://images.pexels.com/photos/5632411/pexels-photo-5632411.jpeg' },
+  16: { name: 'Spice Luxe', category: 'Oriental', price: 3699, image: 'https://images.pexels.com/photos/5632412/pexels-photo-5632412.jpeg' },
+  17: { name: 'Lavender Dream', category: 'Aromatic', price: 2599, image: 'https://images.pexels.com/photos/5632413/pexels-photo-5632413.jpeg' },
+  18: { name: 'Mint Refresh', category: 'Aromatic', price: 2699, image: 'https://images.pexels.com/photos/5632414/pexels-photo-5632414.jpeg' },
+  19: { name: 'Spice Note', category: 'Aromatic', price: 2899, image: 'https://images.pexels.com/photos/5632415/pexels-photo-5632415.jpeg' },
+  20: { name: 'Rosemary Grace', category: 'Aromatic', price: 2499, image: 'https://images.pexels.com/photos/5632416/pexels-photo-5632416.jpeg' }
+};
+
+// Cart Management Functions
+function addToCart(id, name, category, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const productData = PRODUCTS_DB[id] || {};
+    const imageUrl = productData.image || 'https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg';
+    const existingItem = cart.find(item => item.id === id);
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ id, name, category, price, quantity: 1, image: imageUrl });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCountDisplay();
+}
+
+function updateCartCountDisplay() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const cartCountBadge = document.getElementById('cartCount');
+    if (cartCountBadge) {
+        if (totalItems > 0) {
+            cartCountBadge.textContent = totalItems;
+            cartCountBadge.classList.remove('hidden');
+        } else {
+            cartCountBadge.classList.add('hidden');
+        }
+    }
+}
+
+function goToCart() {
+    document.body.style.opacity = '0.8';
+    setTimeout(() => {
+        window.location.href = 'Cart.html';
+    }, 300);
+}
+
+// Initialize cart count on page load
+document.addEventListener('DOMContentLoaded', updateCartCountDisplay);
+</script>
+</body>
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collections | Olfactory Gallery</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300&family=Manrope:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#b3b1b1",
+                        "outline": "#707974",
+                        "on-primary-fixed-variant": "#0b513d",
+                        "on-background": "#1c1c18",
+                        "surface-container": "#f0eee8",
+                        "outline-variant": "#bfc9c3",
+                        "surface-tint": "#2b6954",
+                        "secondary": "#775a19",
+                        "tertiary-container": "#444444",
+                        "on-surface-variant": "#404944",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#fcf9f3",
+                        "on-secondary": "#ffffff",
+                        "surface": "#fcf9f3",
+                        "primary": "#003527",
+                        "tertiary-fixed": "#e4e2e1",
+                        "primary-container": "#064e3b",
+                        "surface-container-low": "#f6f3ed",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f3f0ea",
+                        "tertiary-fixed-dim": "#c8c6c6",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "surface-container-high": "#ebe8e2",
+                        "on-primary-container": "#80bea6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#261900",
+                        "inverse-surface": "#31312d",
+                        "inverse-primary": "#95d3ba",
+                        "tertiary": "#2e2e2e",
+                        "on-secondary-container": "#785a1a",
+                        "surface-container-highest": "#e5e2dc",
+                        "on-primary": "#ffffff",
+                        "background": "#fcf9f3",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#e9c176",
+                        "secondary-container": "#fed488",
+                        "on-primary-fixed": "#002117",
+                        "secondary-fixed": "#ffdea5",
+                        "primary-fixed": "#b0f0d6",
+                        "on-surface": "#1c1c18",
+                        "surface-variant": "#e5e2dc",
+                        "primary-fixed-dim": "#95d3ba",
+                        "surface-dim": "#dcdad4",
+                        "on-error": "#ffffff"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"}
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-secondary/20 overflow-x-hidden">
+
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-[#fcf9f3]/80 dark:bg-[#1c1c18]/80 backdrop-blur-xl shadow-[0_4px_40px_rgba(0,0,0,0.04)] dark:shadow-none">
+    <div class="flex justify-between items-center max-w-7xl mx-auto px-8 py-6">
+        <div class="flex items-center gap-12">
+            <a class="text-2xl font-serif italic tracking-tighter text-[#003527] dark:text-[#fcf9f3]" href="index.html">Olfactory Gallery</a>
+            <div class="hidden md:flex gap-8 font-headline font-light tracking-tight dark:text-stone-200">
+                <a class="text-[#775a19] border-b border-[#775a19] pb-1 font-medium" href="inventory.html">Collections</a>
+                <a class="text-[#2e2e2e] dark:text-[#bfc9c3] hover:text-[#003527] dark:hover:text-white transition-colors duration-400" href="about.html">About</a>
+                <a class="text-[#2e2e2e] dark:text-[#bfc9c3] hover:text-[#003527] dark:hover:text-white transition-colors duration-400" href="testimonials.html">Reviews</a>
+                <a class="text-[#2e2e2e] dark:text-[#bfc9c3] hover:text-[#003527] dark:hover:text-white transition-colors duration-400" href="contact.html">Contact</a>
+            </div>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="relative flex items-center group">
+                <input data-search-input class="w-0 group-hover:w-48 focus:w-48 transition-all duration-500 bg-transparent border-b border-outline-variant/30 focus:ring-0 focus:border-secondary py-1 text-sm outline-none overflow-hidden" placeholder="Search perfumes..." type="text">
+                <button data-search-button class="p-2 cursor-pointer active:scale-95 transition-transform hover:opacity-70" type="button" aria-label="Search products">
+                    <span class="material-symbols-outlined text-[#003527] dark:text-[#fcf9f3]">search</span>
+                </button>
+            </div>
+            <button class="p-2 cursor-pointer active:scale-95 transition-transform hover:opacity-70" data-theme-toggle>
+                <span class="material-symbols-outlined text-[#003527] dark:text-[#fcf9f3]">dark_mode</span>
+            </button>
+            <button onclick="goToCart()" class="p-2 cursor-pointer active:scale-95 transition-transform hover:opacity-70 relative group">
+                <span class="material-symbols-outlined text-[#003527] dark:text-[#fcf9f3]">shopping_bag</span>
+                <span id="cartCount" class="absolute -top-1 -right-1 w-5 h-5 bg-secondary text-white text-xs font-semibold rounded-full flex items-center justify-center hidden group-hover:flex transition-all">0</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<main class="pt-32 pb-20">
+    <!-- Hero Section -->
+    <header class="px-8 mb-16 max-w-7xl mx-auto">
+        <span class="text-secondary font-label text-sm uppercase tracking-[0.2em] mb-4 block">Collection</span>
+        <h1 class="font-headline text-5xl md:text-7xl lg:text-8xl text-primary leading-[1.1] -tracking-widest mb-6 italic">Fragrance Collection</h1>
+        <p data-search-summary class="font-body text-lg text-tertiary/70 max-w-2xl leading-relaxed">Discover our curated selection of premium fragrances organized by fragrance family, origin, and formulation concentration.</p>
+    </header>
+
+    <!-- Product Sections -->
+    <section class="space-y-1">
+        <!-- 1. Woody Fragrances -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 border-y border-outline-variant/10 group hover:bg-surface-container-low transition-colors duration-700">
+            <div class="lg:col-span-3 px-8 py-12 flex flex-col justify-center border-r border-outline-variant/10">
+                <h2 class="font-headline text-3xl text-primary italic mb-2 tracking-tight">Woody</h2>
+                <p class="font-label text-xs uppercase tracking-widest text-secondary mb-6">Cedar, Sandalwood, Vetiver</p>
+                <p class="text-sm text-tertiary/70 leading-relaxed mb-8">Deep, grounded scents with warm, earthy character.</p>
+                <button class="font-label text-xs uppercase tracking-widest text-secondary hover:text-primary transition-colors">View Scents →</button>
+            </div>
+            <div class="lg:col-span-9 px-8 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Woody 1: Sandalwood Essence -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Sandalwood Essence</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Warm sandalwood with oud base</p>
+                        </div>
+                        <button onclick="addToCart(1, 'Sandalwood Essence', 'Woody', 2999)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Woody 2: Cedar Cologne -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Cedar Cologne</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Fresh cedar with vetiver</p>
+                        </div>
+                        <button onclick="addToCart(2, 'Cedar Cologne', 'Woody', 2599)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Woody 3: Vetiver Trail -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Vetiver Trail</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Earthy vetiver with myrrh</p>
+                        </div>
+                        <button onclick="addToCart(3, 'Vetiver Trail', 'Woody', 2799)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Woody 4: Timber Reserve -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Timber Reserve</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Rich wood blend with amber</p>
+                        </div>
+                        <button onclick="addToCart(4, 'Timber Reserve', 'Woody', 3199)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Floral Fragrances -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 border-b border-outline-variant/10 group hover:bg-surface-container-low transition-colors duration-700">
+            <div class="lg:col-span-3 px-8 py-12 flex flex-col justify-center border-r border-outline-variant/10">
+                <h2 class="font-headline text-3xl text-primary italic mb-2 tracking-tight">Floral</h2>
+                <p class="font-label text-xs uppercase tracking-widest text-secondary mb-6">Rose, Peony, Jasmine</p>
+                <p class="text-sm text-tertiary/70 leading-relaxed mb-8">Elegant, refined scents with natural floral beauty.</p>
+                <button class="font-label text-xs uppercase tracking-widest text-secondary hover:text-primary transition-colors">View Scents →</button>
+            </div>
+            <div class="lg:col-span-9 px-8 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Floral 1: Rose Bloom -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632401/pexels-photo-5632401.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632401/pexels-photo-5632401.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Rose Bloom</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Damask rose with white musk</p>
+                        </div>
+                        <button onclick="addToCart(5, 'Rose Bloom', 'Floral', 3299)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Floral 2: Jasmine Night -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Jasmine Night</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Exotic jasmine with vanilla</p>
+                        </div>
+                        <button onclick="addToCart(6, 'Jasmine Night', 'Floral', 3199)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Floral 3: Peony Garden -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632403/pexels-photo-5632403.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632403/pexels-photo-5632403.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Peony Garden</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Fresh peony with green notes</p>
+                        </div>
+                        <button onclick="addToCart(7, 'Peony Garden', 'Floral', 2899)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Floral 4: Orchid Silk -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632404/pexels-photo-5632404.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632404/pexels-photo-5632404.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Orchid Silk</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Delicate orchid with silk musk</p>
+                        </div>
+                        <button onclick="addToCart(8, 'Orchid Silk', 'Floral', 3499)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Fresh Fragrances -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 border-b border-outline-variant/10 group hover:bg-surface-container-low transition-colors duration-700">
+            <div class="lg:col-span-3 px-8 py-12 flex flex-col justify-center border-r border-outline-variant/10">
+                <h2 class="font-headline text-3xl text-primary italic mb-2 tracking-tight">Fresh</h2>
+                <p class="font-label text-xs uppercase tracking-widest text-secondary mb-6">Citrus, Aquatic, Herbal</p>
+                <p class="text-sm text-tertiary/70 leading-relaxed mb-8">Crisp, clean scents with vibrant, energetic character.</p>
+                <button class="font-label text-xs uppercase tracking-widest text-secondary hover:text-primary transition-colors">View Scents →</button>
+            </div>
+            <div class="lg:col-span-9 px-8 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Fresh 1: Citrus Zest -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632405/pexels-photo-5632405.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632405/pexels-photo-5632405.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Citrus Zest</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Bright lemon and bergamot</p>
+                        </div>
+                        <button onclick="addToCart(9, 'Citrus Zest', 'Fresh', 2499)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Fresh 2: Aquatic Wave -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632406/pexels-photo-5632406.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632406/pexels-photo-5632406.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Aquatic Wave</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Fresh water with sea salt</p>
+                        </div>
+                        <button onclick="addToCart(10, 'Aquatic Wave', 'Fresh', 2699)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Fresh 3: Herbal Breeze -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632407/pexels-photo-5632407.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632407/pexels-photo-5632407.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Herbal Breeze</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Mint and eucalyptus blend</p>
+                        </div>
+                        <button onclick="addToCart(11, 'Herbal Breeze', 'Fresh', 2399)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Fresh 4: Green Tea -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632408/pexels-photo-5632408.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632408/pexels-photo-5632408.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Green Tea</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Light green tea with ginger</p>
+                        </div>
+                        <button onclick="addToCart(12, 'Green Tea', 'Fresh', 2299)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Oriental Fragrances -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 border-b border-outline-variant/10 group hover:bg-surface-container-low transition-colors duration-700">
+            <div class="lg:col-span-3 px-8 py-12 flex flex-col justify-center border-r border-outline-variant/10">
+                <h2 class="font-headline text-3xl text-primary italic mb-2 tracking-tight">Oriental</h2>
+                <p class="font-label text-xs uppercase tracking-widest text-secondary mb-6">Amber, Musk, Vanilla</p>
+                <p class="text-sm text-tertiary/70 leading-relaxed mb-8">Rich, sensual scents with warm, luxurious appeal.</p>
+                <button class="font-label text-xs uppercase tracking-widest text-secondary hover:text-primary transition-colors">View Scents →</button>
+            </div>
+            <div class="lg:col-span-9 px-8 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Oriental 1: Amber Dynasty -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632409/pexels-photo-5632409.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632409/pexels-photo-5632409.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Amber Dynasty</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Warm amber with oud</p>
+                        </div>
+                        <button onclick="addToCart(13, 'Amber Dynasty', 'Oriental', 3599)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Oriental 2: Musk Veil -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632410/pexels-photo-5632410.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632410/pexels-photo-5632410.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Musk Veil</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Sensual musk with rose</p>
+                        </div>
+                        <button onclick="addToCart(14, 'Musk Veil', 'Oriental', 3399)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Oriental 3: Vanilla Romance -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632411/pexels-photo-5632411.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632411/pexels-photo-5632411.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Vanilla Romance</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Sweet vanilla with tonka</p>
+                        </div>
+                        <button onclick="addToCart(15, 'Vanilla Romance', 'Oriental', 2999)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Oriental 4: Spice Luxe -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632412/pexels-photo-5632412.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632412/pexels-photo-5632412.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Spice Luxe</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Cinnamon and spice blend</p>
+                        </div>
+                        <button onclick="addToCart(16, 'Spice Luxe', 'Oriental', 3199)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Aromatic Fragrances -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 border-b border-outline-variant/10 group hover:bg-surface-container-low transition-colors duration-700">
+            <div class="lg:col-span-3 px-8 py-12 flex flex-col justify-center border-r border-outline-variant/10">
+                <h2 class="font-headline text-3xl text-primary italic mb-2 tracking-tight">Aromatic</h2>
+                <p class="font-label text-xs uppercase tracking-widest text-secondary mb-6">Lavender, Mint, Spice</p>
+                <p class="text-sm text-tertiary/70 leading-relaxed mb-8">Balanced, sophisticated scents with aromatic complexity.</p>
+                <button class="font-label text-xs uppercase tracking-widest text-secondary hover:text-primary transition-colors">View Scents →</button>
+            </div>
+            <div class="lg:col-span-9 px-8 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Aromatic 1: Lavender Dream -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632413/pexels-photo-5632413.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632413/pexels-photo-5632413.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Lavender Dream</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Soft lavender with chamomile</p>
+                        </div>
+                        <button onclick="addToCart(17, 'Lavender Dream', 'Aromatic', 2399)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Aromatic 2: Mint Refresh -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632414/pexels-photo-5632414.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632414/pexels-photo-5632414.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Mint Refresh</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Invigorating mint fusion</p>
+                        </div>
+                        <button onclick="addToCart(18, 'Mint Refresh', 'Aromatic', 2299)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Aromatic 3: Spice Note -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632415/pexels-photo-5632415.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632415/pexels-photo-5632415.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Spice Note</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Clove and cardamom blend</p>
+                        </div>
+                        <button onclick="addToCart(19, 'Spice Note', 'Aromatic', 2599)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Aromatic 4: Rosemary Grace -->
+                <div class="aspect-[3/4] bg-surface-container rounded-lg overflow-hidden group/item hover:shadow-lg transition-all duration-400 flex flex-col">
+                    <div class="flex-1 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/5632416/pexels-photo-5632416.jpeg')">
+                        <img src="https://images.pexels.com/photos/5632416/pexels-photo-5632416.jpeg" class="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"/>
+                    </div>
+                    <div class="p-4 bg-surface-container-lowest flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="font-headline text-sm font-semibold text-primary mb-1">Rosemary Grace</h3>
+                            <p class="text-xs text-tertiary/70 leading-tight">Herbaceous rosemary mix</p>
+                        </div>
+                        <button onclick="addToCart(20, 'Rosemary Grace', 'Aromatic', 2499)" class="w-full mt-3 px-3 py-2 bg-primary text-on-primary text-xs font-semibold rounded hover:opacity-90 transition-opacity">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-[#f6f3ed] dark:bg-[#121210] w-full pt-20 pb-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-8 border-t border-[#bfc9c3]/15 pt-12">
+        <div>
+            <div class="text-xl font-serif text-[#003527] dark:text-[#fcf9f3] mb-8">Gallery</div>
+            <p class="font-label text-sm tracking-wide leading-relaxed text-[#2e2e2e]/70 dark:text-[#bfc9c3]/70 mb-6">
+                A collection of premium fragrances for the discerning customer.
+            </p>
+        </div>
+        <div>
+            <h4 class="font-headline text-primary dark:text-on-tertiary mb-6 text-sm uppercase tracking-widest">Shop</h4>
+            <div class="flex flex-col gap-4 font-label text-sm tracking-wide">
+                <a class="text-[#2e2e2e]/70 dark:text-[#bfc9c3]/70 hover:text-[#775a19] transition-all" href="inventory.html">Collections</a>
+                <a class="text-[#2e2e2e]/70 dark:text-[#bfc9c3]/70 hover:text-[#775a19] transition-all" href="#fragrances">All Fragrances</a>
+                <a class="text-[#2e2e2e]/70 dark:text-[#bfc9c3]/70 hover:text-[#775a19] transition-all" href="#gifts">Gift Sets</a>
+            </div>
+        </div>
+        <div>
+            <h4 class="font-headline text-primary dark:text-on-tertiary mb-6 text-sm uppercase tracking-widest">Support</h4>
+            <div class="flex flex-col gap-4 font-label text-sm tracking-wide">
+                <a class="text-[#2e2e2e]/70 dark:text-[#bfc9c3]/70 hover:text-[#775a19] transition-all" href="about.html">About</a>
+                <a class="text-[#2e2e2e]/70 dark:text-[#bfc9c3]/70 hover:text-[#775a19] transition-all" href="privacy.html">Privacy</a>
+                <a class="text-[#2e2e2e]/70 dark:text-[#bfc9c3]/70 hover:text-[#775a19] transition-all" href="contact.html">Contact</a>
+            </div>
+        </div>
+        <div>
+            <h4 class="font-headline text-primary dark:text-on-tertiary mb-6 text-sm uppercase tracking-widest">Newsletter</h4>
+            <p class="font-label text-sm tracking-wide leading-relaxed text-[#2e2e2e]/70 dark:text-[#bfc9c3]/70 mb-4">
+                Get new releases and exclusive offers.
+            </p>
+            <div class="relative">
+                <input class="w-full bg-transparent border-b border-outline-variant/30 py-2 text-sm focus:border-secondary transition-colors outline-none" placeholder="Your email" type="email">
+                <button class="absolute right-0 bottom-2 text-secondary hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-8 mt-20 flex flex-col md:flex-row justify-between items-center text-[10px] text-[#2e2e2e]/40 dark:text-[#bfc9c3]/40 uppercase tracking-[0.2em]">
+        <p>© 2024 Olfactory Gallery. All Rights Reserved.</p>
+        <div class="flex gap-8 mt-4 md:mt-0">
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+            <a href="returns.html">Returns</a>
+        </div>
+    </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

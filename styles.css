@@ -1,0 +1,423 @@
+/* ============================================
+   THE OLFACTORY GALLERY - CUSTOM STYLES
+   ============================================ */
+
+:root {
+    --transition-main: 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    --transition-flip: 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Material Icons Styling */
+.material-symbols-outlined {
+    font-family: "Material Symbols Outlined";
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    white-space: nowrap;
+    direction: ltr;
+    letter-spacing: normal;
+    text-transform: none;
+    user-select: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+.material-symbols-outlined.filled {
+    font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Backdrop Effects */
+.luxury-blur {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* Card Animations */
+.parallax-card {
+    transition: transform var(--transition-main), box-shadow var(--transition-main);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.parallax-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
+}
+
+/* Flip Card Styles */
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform var(--transition-flip);
+    transform-style: preserve-3d;
+}
+
+.flip-card-container:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+}
+
+/* Scroll Reveal Animations */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity var(--transition-main), transform var(--transition-main);
+}
+
+.reveal-on-scroll.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hero Image Effects */
+#hero-perfume-img {
+    transition: opacity 0.18s linear, transform 0.18s linear;
+}
+
+.theme-wave {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    clip-path: circle(0 at var(--wave-x, 50%) var(--wave-y, 50%));
+    transition: clip-path 700ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease-out;
+    opacity: 1;
+}
+
+.theme-wave.is-dark {
+    background: radial-gradient(circle, rgba(18, 18, 16, 0.96), rgba(10, 10, 9, 0.99));
+}
+
+.theme-wave.is-light {
+    background: radial-gradient(circle, rgba(252, 249, 243, 0.96), rgba(240, 238, 232, 0.99));
+}
+
+/* Dark Mode Overrides */
+html.dark body {
+    background-color: #121210;
+    color: #ebe8e2;
+}
+
+html.dark .bg-surface {
+    background-color: #1c1b18;
+}
+
+html.dark .bg-surface-container-low {
+    background-color: #171614;
+}
+
+html.dark .text-primary {
+    color: #80d8c8;
+}
+
+html.dark .text-secondary {
+    color: #ffc968;
+}
+
+/* Utility Classes */
+.vertical-rl {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================================
+   COMPREHENSIVE DARK MODE SUPPORT
+   ============================================ */
+
+html.dark {
+    --tw-bg-opacity: 1;
+    color-scheme: dark;
+}
+
+/* Background & Surface Colors */
+html.dark .bg-surface {
+    background-color: #1c1b18 !important;
+}
+
+html.dark .bg-surface-container-low {
+    background-color: #171614 !important;
+}
+
+html.dark .bg-surface-container-highest {
+    background-color: #2a2926 !important;
+}
+
+html.dark .bg-background {
+    background-color: #121210 !important;
+}
+
+html.dark footer {
+    background-color: #0f0e0c !important;
+}
+
+/* Text Colors */
+html.dark .text-primary {
+    color: #80d8c8 !important;
+}
+
+html.dark .text-secondary {
+    color: #ffc968 !important;
+}
+
+html.dark .text-tertiary {
+    color: #e0d9d0 !important;
+}
+
+html.dark .text-on-surface {
+    color: #ebe8e2 !important;
+}
+
+html.dark .text-tertiary\/70 {
+    color: rgba(224, 217, 208, 0.7) !important;
+}
+
+html.dark .text-tertiary\/80 {
+    color: rgba(224, 217, 208, 0.8) !important;
+}
+
+html.dark .text-2e2e2e {
+    color: #c7c0b7 !important;
+}
+
+html.dark .text-\[\#2e2e2e\] {
+    color: #c7c0b7 !important;
+}
+
+html.dark .text-\[\#2e2e2e\]\/70 {
+    color: rgba(199, 192, 183, 0.7) !important;
+}
+
+html.dark .text-\[\#775a19\] {
+    color: #ffc968 !important;
+}
+
+/* Button Styles */
+html.dark .bg-gradient-to-br {
+    background-image: linear-gradient(135deg, #003527, #064e3b) !important;
+}
+
+html.dark button {
+    color: #ebe8e2 !important;
+}
+
+html.dark button:hover {
+    opacity: 0.9;
+}
+
+html.dark .bg-primary {
+    background-color: #003527 !important;
+    color: #ebe8e2 !important;
+}
+
+/* Input & Form Styles */
+html.dark input,
+html.dark textarea {
+    background-color: transparent;
+    color: #ebe8e2 !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+    color: rgba(235, 232, 226, 0.4) !important;
+}
+
+html.dark input:focus,
+html.dark textarea:focus {
+    border-bottom-color: #ffc968 !important;
+}
+
+/* Border & Divider Styles */
+html.dark .border-\[\#bfc9c3\]\/15 {
+    border-color: rgba(191, 201, 195, 0.1) !important;
+}
+
+html.dark .border-outline-variant\/30 {
+    border-color: rgba(191, 201, 195, 0.15) !important;
+}
+
+html.dark .border-secondary\/30 {
+    border-color: rgba(255, 201, 104, 0.2) !important;
+}
+
+/* Card & Container Styles */
+html.dark .bg-surface-container-lowest\/40 {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+html.dark .border-outline-variant\/10 {
+    border-color: rgba(191, 201, 195, 0.08) !important;
+}
+
+/* Links & Underlines */
+html.dark a {
+    color: #80d8c8 !important;
+}
+
+html.dark a:hover {
+    color: #ffc968 !important;
+}
+
+html.dark .underline {
+    text-decoration-color: rgba(255, 201, 104, 0.3);
+}
+
+/* Shadow Adjustments for Dark Mode */
+html.dark .shadow-xl {
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+html.dark .shadow-\[0_40px_60px_-15px_rgba\(0\2c 0\2c 0\2c 0\.05\)\] {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Navigation Bar Dark Mode */
+html.dark nav {
+    background-color: rgba(28, 27, 24, 0.9) !important;
+    backdrop-filter: blur(24px);
+}
+
+html.dark nav a {
+    color: #ebe8e2 !important;
+}
+
+html.dark nav a:hover {
+    color: #ffc968 !important;
+}
+
+/* Hero Section Dark Mode */
+html.dark .bg-gradient-to-r {
+    background-image: linear-gradient(90deg, #1c1b18, rgba(28, 27, 24, 0.3), transparent) !important;
+}
+
+/* Icon Styling for Dark Mode */
+html.dark .material-symbols-outlined {
+    color: inherit;
+}
+
+/* Parallax Card Overlays in Dark Mode */
+html.dark .parallax-card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+/* ============================================
+   HERO FADE ANIMATIONS
+   ============================================ */
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.hero-fade {
+    animation: fadeInDown 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-fade-bottom {
+    animation: fadeInDown 2.5s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+}
+
+/* ============================================
+   CASCADING FLOATING TILES SECTION
+   ============================================ */
+
+.perspective-3d {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.cascade-tile {
+    opacity: 0;
+    animation: cascadeSlide 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: calc(0.1s * var(--cascade-index));
+}
+
+@keyframes cascadeSlide {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) rotateX(-10deg);
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+    }
+}
+
+.cascade-tile > div {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cascade-tile:hover {
+    transform: translateZ(20px);
+}
+
+/* Dark mode support for cascade tiles */
+html.dark .cascade-tile > div {
+    background-color: #2a2926 !important;
+    border-color: rgba(191, 201, 195, 0.1) !important;
+    color: #ebe8e2 !important;
+}
+
+html.dark .cascade-tile h3 {
+    color: #80d8c8 !important;
+}
+
+html.dark .cascade-tile p {
+    color: rgba(235, 232, 226, 0.7) !important;
+}
+
+html.dark .parallax-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+}
+
+/* Flip Card Dark Mode */
+html.dark .flip-card-front {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+html.dark .flip-card-back {
+    background-color: #003527;
+}
